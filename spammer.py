@@ -7,6 +7,8 @@ By using this program you agree to the terms. (the above)
 """
 import os
 import time
+import random
+import math
 
 print("Spammer by Parmo#1619\n\n")
 
@@ -18,39 +20,68 @@ import pyautogui
 
 
 def spam():
-    confirm = input(
-        "Please change 'spamMsg.txt' to what you wish to spam. By default will spam the Bee-movie transcript. Press "
-        "enter to continue ")
+    delay = input("Do you want a 'random' delay between 0 and 1 or a 'fixed' delay?: ")
+    delay = delay.lower()
+    delayTime = input("Ok! How much delay do you want? (in seconds. Also notice a delay under 2 for discord is not reccomended.): ")
 
-    if " " in confirm or confirm == "":
+    files = []
 
-        delay = input("How much delay do you want between sending the messages? (in seconds): ")
-        print(f'Delay has been set to {delay}')
+    for file in os.listdir("./MESSAGEFILES"):
+        if file.endswith(".txt"):
+            files.append(f'./MESSAGEFILES/{file}')
+    print("Files listed.")
 
-        msg = open('spamMsg.txt', 'r')
+    mode = input("Do you want to use a random 'preset' file from MESSAGEFILES or a 'custom' file?: ")
+    mode = mode.lower()
 
-        if os.stat('spamMsg.txt').st_size == 0:
-            return print("Message file is empty. Please add content to message file to continue")
+    if mode == "preset":
+        msg = open(random.choice(files), 'r')
+        print(msg)
+    elif mode == "custom":
+        msg = open("custom.txt", 'r')
 
-        print(
-            """
-            ================================================================================================================
+    log = input("OK ONE LAST THING! Do you want logs in the console when you send a message? yes/no: ")
+    log = log.lower()
 
-            Please get ready for spamming in the application you want to spam in.
-            Initializing, please wait...
+    print(
+        """
+        ================================================================================================================
 
-            ================================================================================================================
-            """
-        )
+        Please get ready for spamming in the application you want to spam in.
+        Initializing, please wait...
 
-        time.sleep(2)
-        print("Spamming started...")
+        ================================================================================================================
+        """
+    )
 
+    time.sleep(5)
+    print("Spamming started...")
+
+    if delay == 'fixed' and log == 'yes':
         for word in msg:
             pyautogui.typewrite(word)
-            time.sleep(float(delay))
+            time.sleep(float(delayTime))
             pyautogui.press("enter")
-            print(word + 'Has been sent. Press CTRL+C to stop the program')
+            print(f'Message sent: {word}')
+    elif delay == 'fixed' and log == 'no':
+        for word in msg:
+            pyautogui.typewrite(word)
+            time.sleep(float(delayTime))
+            pyautogui.press("enter")
+            print(f'Message sent: {word}')
+    elif delay == 'random' and log == 'yes':
+        for word in msg:
+            delayTime = random.random()
+            pyautogui.typewrite(word)
+            time.sleep(delayTime)
+            pyautogui.press("enter")
+            print(f'Message sent: {word}')
+    elif delay == 'random' and log == 'no':
+        for word in msg:
+            delayTime = random.random()
+            pyautogui.typewrite(word)
+            time.sleep(delayTime)
+            pyautogui.press("enter")
 
     print("Finished spamming.")
 
