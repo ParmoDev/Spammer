@@ -1,2 +1,3 @@
 # Spammer
-Spams a series of messages.
+Just a quick thing I made cause i was bored /shrug
+Enjoy!
