@@ -29,7 +29,7 @@ def spam():
 
         msg = open('spamMsg.txt', 'r')
 
-        if msg == "":
+        if os.stat('spamMsg.txt').st_size == 0:
             return print("Message file is empty. Please add content to message file to continue")
 
         print(
@@ -52,6 +52,7 @@ def spam():
             pyautogui.press("enter")
             print(word + 'Has been sent. Press CTRL+C to stop the program')
 
+    print("Finished spamming.")
+
 
 spam()
-print("Finished spamming.")
