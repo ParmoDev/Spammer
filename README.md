@@ -3,5 +3,5 @@ Just a quick thing I made cause i was bored /shrug
 
 **Enjoy!**
 
-# Functionality
-This will spam a series of messages which can be either a preset or one you have made yourself it is all interactive and there is no need for you to change the code!
+# How to run
+Run the file called run.bat and if it's not already installed it will install some required dependencies then it will open up the GUI
